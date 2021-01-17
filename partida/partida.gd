@@ -4,8 +4,8 @@ class_name Partida
 var nombre
 var id
 
-func _init(nombre):
-	self.nombre = nombre
+func _init(_nombre):
+	self.nombre = _nombre
 
 func guardar_en_db():
 	self.id = Db.generar_id("partidas")

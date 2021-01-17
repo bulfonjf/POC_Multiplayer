@@ -7,7 +7,9 @@ signal partida_lista(partida)
 var _ignore
 var partida = {
 		"nombre": "partida_1_prueba",
-		"ronda": 1,
+		"ronda": { 
+			"numero_ronda" : 1
+		},
 		"facciones": [{
 			"nombre": "orcos",
 			"unidades": [{
