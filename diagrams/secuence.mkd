@@ -1,0 +1,66 @@
+# Sequence diagram
+
+```mermaid
+sequenceDiagram
+  participant u as usuario
+  participant m as menu_crear_partida
+  participant g as game_state
+  participant o as orquestador
+  participant da as data access
+
+  u ->> m : click en ready
+  m ->> g: iniciar partida
+  note over g, o: por signal informa que la partida esta lista con los datos de la partida
+  g ->> o: inciar partida
+  note over g, o: prepara la ronda, las facciones y los edificios.<br> esto solo sucede a nivel datos, el servidor no va a tener nada visual.<br>Tambien oculta el menu_crear_partida y muestra un vista de partida en curso 
+  o ->> da: guardar partida
+  activate da
+  da -->> da: guardar ronda
+  da -->> da: guardar facciones
+  da -->> da: guardar unidades
+  da -->> da: guardar edificios
+  deactivate da
+
+```
+
+```mermaid
+sequenceDiagram
+
+  participant u as usuario
+  participant s as server
+  participant c1 as cliente_1
+  participant c2 as cliente_2
+
+  rect rgba(0, 0, 255, .1)
+    u ->> s : inicia el servidor
+    s -->> s : crea el servidor
+    u ->> c1: inicia el cliente
+    c1 ->> s : conecta
+    u ->> c2: inicia el cliente
+    c2 ->> s : conecta
+    u ->> s : click_ready
+  end
+
+  rect rgba(0, 0, 200, .3)
+    s -->> s : puppetasync crea la partida
+    s ->> c1 : puppetasync crea la partida
+    s ->> c2 : puppetasync crea la partida
+    c1 -->> c1: crea los nodos
+    c2 -->> c2: crea los nodos
+    c1 ->> s : click en unidad
+  end
+
+  rect rgba(150, 0, 50, .4)
+
+    %% Seleccionar una unidad
+
+    activate s
+    s -->> s : agrega accion
+    s -->> s : procesar
+    s -->> s : seleccion unidad valida path de acciones y contexto
+    s -->> s : constituye la escena pero no hace el build, se queda con elj son
+    s -->> c1 : seleccion unidad envia el json (por id de network)
+    deactivate s
+    c1 ->> c1: hace el build de la escena
+  end
+```

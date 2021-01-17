@@ -1,0 +1,35 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "Partida",
+"language": "GDScript",
+"path": "res://partida/partida.gd"
+} ]
+_global_script_class_icons={
+"Partida": ""
+}
+
+[application]
+
+config/name="POC_Multijugador"
+run/main_scene="res://EscenaPrincipal.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+Gamestate="*res://gamestate/gamestate.gd"
+Orquestador="*res://orquestador.gd"
+Db="*res://acceso_a_datos/db.gd"
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
