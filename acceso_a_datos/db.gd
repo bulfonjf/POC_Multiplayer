@@ -1,37 +1,46 @@
 extends Node
 
-var db
+var db_path = "res://db.db"
 
 # SQLite module
 const SQLite = preload("res://lib/gdsqlite.gdns");
 
 func _ready():
 	# Create gdsqlite instance
-	db = SQLite.new();
+	var db = SQLite.new();
 	
 	# Open item database
-	if (not db.open_db("res://db.db")):
+	var check_connection = db.open_db(db_path)
+	if (check_connection):
+		db.close()
+	else:
 		# to-do tirar exepcion si no se puede conectar a la db
 		print("ERROR: no se pudo abrir la DB: db.db")
 
-func _exit_tree():
-	if (db and db.loaded()):
-		# Close database
-		db.close();
-
 func consultar(consulta):
-	return db.fetch_array(consulta)
+	# Create gdsqlite instance
+	var db = SQLite.new();
+
+	# Create a new connection with the database
+	db.open_db(db_path)
+
+	# do the query
+	var result =  db.fetch_array(consulta)
+
+	# close the connection
+	db.close()
+
+	return result
 
 func actualizar(comando):
+	# Create gdsqlite instance
+	var db = SQLite.new();
+
+	# Create a new connection with the database
+	db.open_db(db_path)
+
+	# do the query
 	db.query(comando)
 
-func generar_id(nombre_tabla):
-	var id = 1
-	var fila = self.consultar("select max(id) as id from %s" % nombre_tabla)
-
-	if fila and fila[0]:
-		var max_id = fila[0]["id"]
-		id = int(max_id) + 1
-
-	return id
-
+	# close the connection
+	db.close()

@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Partida",
 "language": "GDScript",
 "path": "res://partida/partida.gd"
+}, {
+"base": "Reference",
+"class": "Ronda",
+"language": "GDScript",
+"path": "res://ronda/ronda.gd"
 } ]
 _global_script_class_icons={
-"Partida": ""
+"Partida": "",
+"Ronda": ""
 }
 
 [application]
