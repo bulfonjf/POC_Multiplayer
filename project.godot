@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "Migraciones",
+"language": "GDScript",
+"path": "res://acceso_a_datos/migraciones.gd"
+}, {
+"base": "Reference",
 "class": "Partida",
 "language": "GDScript",
 "path": "res://partida/partida.gd"
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://ronda/ronda.gd"
 } ]
 _global_script_class_icons={
+"Migraciones": "",
 "Partida": "",
 "Ronda": ""
 }

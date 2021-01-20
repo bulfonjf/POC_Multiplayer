@@ -1,17 +1,11 @@
 -- SQLite
 
-select *
-from partidas
-
-/*
-select * from partidas
-
-create table partidas (
+create table if not exists partidas (
     id integer PRIMARY KEY,
     nombre nvarchar(100)
     )
 
-create table rondas (
+create table if not exists rondas (
     id integer PRIMARY KEY,
     id_partida integer,
     numero_ronda integer
@@ -19,7 +13,7 @@ create table rondas (
     FOREIGN KEY id_partida REFERENCES partidas(id)
     )
 
-create table turnos (
+create table if not exists turnos (
     id integer PRIMARY KEY,
     id_jugador integer,
     id_partida integer,
@@ -29,7 +23,7 @@ create table turnos (
     FOREIGN KEY (id_partida) REFERENCES partidas(id)
     )
 
-create table jugadores (
+create table if not exists jugadores (
     id integer PRIMARY KEY,
     id_partida integer,
     nombre nvarchar(500) unique,
@@ -38,7 +32,7 @@ create table jugadores (
     FOREIGN KEY (id_partida) REFERENCES partidas(id)
 )
 
-create table facciones (
+create table if not exists facciones (
     id integer PRIMARY KEY,
     id_jugador integer,
     nombre nvarchar(500),
@@ -46,7 +40,7 @@ create table facciones (
     FOREIGN KEY (id_jugador) REFERENCES jugadores(id)
 )
 
-create table unidades (
+create table if not exists unidades (
     id integer PRIMARY KEY,
     id_faccion integer,
     vida integer,
@@ -56,7 +50,7 @@ create table unidades (
     FOREIGN KEY (id_faccion) REFERENCES facciones(id)
 )
 
-create table items (
+create table if not exists items (
     id integer PRIMARY KEY,
     id_partida integer,
     nombre nvarchar(500),
@@ -68,21 +62,13 @@ create table items (
     FOREIGN KEY (id_partida) REFERENCES partidas(id)
 )
 
-create table items_equipados (
+create table if not exists if not exists items_equipados (
     id_unidad integer,
     id_item integer,
 
     FOREIGN KEY (id_unidad) REFERENCES unidades(id)
     FOREIGN KEY (id_item) REFERENCES items(id)
 )
-
-insert into borrar_tabla (id) values ("hola");
-
-select * from borrar_tabla;
-
-drop table borrar_tabla;
-
-*/
 
 /* func _ready(): */
 /*     # Create gdsqlite instance */
