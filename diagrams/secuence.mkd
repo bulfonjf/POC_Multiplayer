@@ -9,12 +9,13 @@ sequenceDiagram
   participant da as data access
 
   u ->> m : click en ready
-  m ->> g: iniciar partida
+  m ->> g: iniciar partida(dic  partida)
+  note over g, o: partida es un json con: nombre, ronda, jugadores, facciones,<br> facciones:nombre, facciones:unidades, facciones:edificos.<br> esto solo sucede a nivel datos, el servidor no va a tener nada visual.<br>Tambien oculta el menu_crear_partida y muestra un vista de partida en curso 
   note over g, o: por signal informa que la partida esta lista con los datos de la partida
-  g ->> o: inciar partida
-  note over g, o: prepara la ronda, las facciones y los edificios.<br> esto solo sucede a nivel datos, el servidor no va a tener nada visual.<br>Tambien oculta el menu_crear_partida y muestra un vista de partida en curso 
+  g ->> o: inciar partida(dic partida)
   o ->> da: guardar partida
   activate da
+  da -->> da: guardar jugadores
   da -->> da: guardar ronda
   da -->> da: guardar facciones
   da -->> da: guardar unidades

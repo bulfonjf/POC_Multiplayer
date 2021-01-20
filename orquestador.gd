@@ -10,7 +10,7 @@ var migraciones_script = preload("res://acceso_a_datos/migraciones.gd")
 var _ignore
 
 func _ready():
-	# to-do al parecer el ready de orquestador se esta ejecutando dos veces
+	# to-do al parecer el ready de orquestador se esta ejecutando dos veces. Puede pasar pq es escena principal y singleton a la vez
 	var migraciones = migraciones_script.new()
 	migraciones.aplicar_migraciones()
 

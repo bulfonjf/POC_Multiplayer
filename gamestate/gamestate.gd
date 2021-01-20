@@ -42,4 +42,7 @@ func _player_disconnected(_id):
 	print("Client ", _id, " disconnected")
 
 func iniciar_partida(partida):
+	var cliente1 = 
+	partida["jugadores"] = [cliente1, cliente2]
+	# to-do cambiar para que comunica por signal
 	Orquestador.iniciar_partida(partida)
