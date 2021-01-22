@@ -74,4 +74,4 @@ remote func update_player_list():
 func iniciar_partida(_partida):
 	for peer_id in players:
 		rpc_id(peer_id,"iniciar_partida", _partida)
-	#Orquestador.iniciar_partida(partida)
+	Orquestador.iniciar_partida(_partida)

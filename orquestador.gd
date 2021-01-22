@@ -29,7 +29,7 @@ func iniciar_partida(_partida):
 	
 	iniciar_ronda(_partida["ronda"], partida.id, transaccion_db) 
 	iniciar_facciones(_partida["facciones"], transaccion_db)
-
+#	iniciar_grilla(tiles, celdas_ocupadas, transaccion_db)
 	transaccion_db.cerrar_transaccion()
 
 func iniciar_ronda(_ronda, _id_partida, _db):
@@ -42,6 +42,9 @@ func iniciar_facciones(facciones, _db):
 		iniciar_unidades(faccion["unidades"], _db)
 		iniciar_edificios(faccion["edificios"], _db)
 	pass
+
+func iniciar_grilla(_tiles, _celdas_ocupadas, _db):
+	pass	
 
 func iniciar_unidades(unidades, _db):
 	pass

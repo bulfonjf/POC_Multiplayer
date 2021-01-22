@@ -5,23 +5,70 @@ onready var lista_clientes : VBoxContainer = $VBoxContainer
 signal partida_lista(partida)
 
 var _ignore
+#var partida = {
+#		"nombre": "partida_1_prueba",
+#		"ronda": { 
+#			"numero_ronda" : 1
+#		},
+#		"facciones": [{
+#			"nombre": "orcos",
+#			"unidades": [{
+#				"fighter": {
+#					"nombre": "fighter",
+#					"equipo": []
+#				}
+#			}],
+#			"edificios": []
+#		}]
+#	}
 var partida = {
 		"nombre": "partida_1_prueba",
 		"ronda": { 
 			"numero_ronda" : 1
 		},
-		"facciones": [{
-			"nombre": "orcos",
-			"unidades": [{
-				"fighter": {
-					"nombre": "fighter",
-					"equipo": []
+		"edificios":
+		{
+			"nombre": "base",
+			"posicion": posiciones_edificios[0],
+			"faccion": "orcos"
+		}
+		{
+			"nombre": "aserradero",
+			"posicion": posiciones_edificios[1],
+			"faccion": "orcos"
+		}
+		{
+			"nombre": "cantera",
+			"posicion": posiciones_edificios[2],
+			"faccion": "orcos"
+		}
+		{
+			"nombre": "mina_de_oro",
+			"posicion": posiciones_edificios[3],
+			"faccion": "orcos"
+		},
+		"facciones":
+		{
+			"nombre" : "orcos",
+			"unidades": [
+				{
+					"posicion" : posiciones_unidades[0],
+					"clase" : "fighter",
+					"equipamiento" : ["pechera de cuero", "espada", "armadura de caballo"], #// ojo, usar los mismos nombres que items
 				}
-			}],
-			"edificios": []
-		}]
-	}
-	
+			]
+		},
+		{
+			"nombre" : "elfos",
+			"unidades": [
+				{
+					"posicion" : posiciones_unidades[1],
+					"clase" : "caballero",
+					"equipamiento" : ["pechera de cuero", "espada","armadura de caballo"], #// ojo, usar los mismos nombres que items
+				}
+			]
+		}
+	}	
 
 func _ready():
 	
