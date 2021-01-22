@@ -1,5 +1,6 @@
 -- SQLite
 
-BEGIN TRANSACTION;
-    INSERT INTO PARTIDAS VALUES (5, "BORRAR");
-    SELECT * FROM PARTIDAS;
+create table if not exist partidas (
+    id integer PRIMARY KEY,
+    nombre nvarchar(100)
+    )
