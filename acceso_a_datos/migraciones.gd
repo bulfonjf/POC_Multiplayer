@@ -13,7 +13,8 @@ func aplicar_migraciones():
 		crear_facciones(),
 		crear_unidades(),
 		crear_items(),
-		crear_items_equipados()
+		crear_items_equipados(),
+		crear_celdas_ocupadas()
 		]
 	
 	var transaccion_db = transaccion_script.new()
@@ -80,6 +81,7 @@ func crear_unidades():
 		create table if not exists unidades (
 		id integer PRIMARY KEY,
 		id_faccion integer,
+		tipo nvarchar(500),
 		vida integer,
 		ataque_base integer,
 		defensa_base integer,
@@ -103,7 +105,7 @@ func crear_items():
 
 func crear_items_equipados():
 	return """
-		create table if not exists if not exists items_equipados (
+		create table if not exists items_equipados (
 		id_unidad integer,
 		id_item integer,
 
@@ -111,3 +113,11 @@ func crear_items_equipados():
 		FOREIGN KEY (id_item) REFERENCES items(id)
 		);"""
 
+func crear_celdas_ocupadas():
+	return """
+		create table if not exists celdas_ocupadas (
+			posicion_x integer,
+			posicion_y integer,
+			entidad_id integer,
+			entidad_tipo nvarchar(500)
+		);"""

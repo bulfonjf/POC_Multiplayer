@@ -26,50 +26,58 @@ var partida = {
 		"ronda": { 
 			"numero_ronda" : 1
 		},
-		"edificios":
-		{
-			"nombre": "base",
-			"posicion": posiciones_edificios[0],
-			"faccion": "orcos"
-		}
-		{
-			"nombre": "aserradero",
-			"posicion": posiciones_edificios[1],
-			"faccion": "orcos"
-		}
-		{
-			"nombre": "cantera",
-			"posicion": posiciones_edificios[2],
-			"faccion": "orcos"
-		}
-		{
-			"nombre": "mina_de_oro",
-			"posicion": posiciones_edificios[3],
-			"faccion": "orcos"
-		},
-		"facciones":
-		{
-			"nombre" : "orcos",
-			"unidades": [
-				{
-					"posicion" : posiciones_unidades[0],
-					"clase" : "fighter",
-					"equipamiento" : ["pechera de cuero", "espada", "armadura de caballo"], #// ojo, usar los mismos nombres que items
-				}
-			]
-		},
-		{
-			"nombre" : "elfos",
-			"unidades": [
-				{
-					"posicion" : posiciones_unidades[1],
-					"clase" : "caballero",
-					"equipamiento" : ["pechera de cuero", "espada","armadura de caballo"], #// ojo, usar los mismos nombres que items
-				}
-			]
-		}
-	}	
-
+		"equipos":[
+			{
+				"nombre": "azul",
+				"jugadores": [
+					{
+						"nombre": "pepe",
+						"faccion": {
+							"nombre": "orcos",
+							"unidades": [
+								{
+									"tipo": "fighter",
+									"posicion": Convertir.celda(Vector2(1,0)),
+									"equipamiento": ["pechera de cuero", "espada"]
+								}
+							],
+							"edificios": [
+								{
+									"tipo": "base",
+									"posicion": Convertir.celda(Vector2(0,0))
+								}
+							]
+						}
+					}
+				]
+			},
+			{
+				"nombre": "rojo",
+				"jugadores": [
+					{
+						"nombre": "cacho",
+						"faccion": {
+							"nombre": "elfos",
+							"unidades": [
+								{
+									"tipo": "caballero",
+									"posicion": Convertir.celda(Vector2(10,6)),
+									"equipamiento" : ["pechera de cuero", "espada", "armadura de caballo"]
+								}
+							],
+							"edificios": [
+								{
+									"tipo": "base",
+									"posicion": Convertir.celda(Vector2(9,6))
+								}
+							]
+						}
+					}
+				]
+			},
+		]
+	}
+		
 func _ready():
 	
 	_ignore = Gamestate.connect("cliente_conectado", self, "_on_cliente_conectado")

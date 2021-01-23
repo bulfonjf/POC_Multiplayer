@@ -10,9 +10,29 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
-"class": "Grilla",
+"class": "AdaptadorVector",
 "language": "GDScript",
-"path": "res://grilla/grilla.gd"
+"path": "res://value_types/adaptador_vector.gd"
+}, {
+"base": "",
+"class": "Celda",
+"language": "GDScript",
+"path": "res://value_types/celda.gd"
+}, {
+"base": "Reference",
+"class": "Equipo",
+"language": "GDScript",
+"path": "res://equipo/equipo.gd"
+}, {
+"base": "Reference",
+"class": "Faccion",
+"language": "GDScript",
+"path": "res://faccion/faccion.gd"
+}, {
+"base": "Reference",
+"class": "Jugador",
+"language": "GDScript",
+"path": "res://jugador/jugador.gd"
 }, {
 "base": "Reference",
 "class": "Migraciones",
@@ -24,16 +44,38 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://partida/partida.gd"
 }, {
+"base": "",
+"class": "Pixel",
+"language": "GDScript",
+"path": "res://value_types/pixel.gd"
+}, {
 "base": "Reference",
 "class": "Ronda",
 "language": "GDScript",
 "path": "res://ronda/ronda.gd"
+}, {
+"base": "Reference",
+"class": "Unidad",
+"language": "GDScript",
+"path": "res://unidad/unidad.gd"
+}, {
+"base": "Node",
+"class": "ext_lista",
+"language": "GDScript",
+"path": "res://extensiones/listas.gd"
 } ]
 _global_script_class_icons={
-"Grilla": "",
+"AdaptadorVector": "",
+"Celda": "",
+"Equipo": "",
+"Faccion": "",
+"Jugador": "",
 "Migraciones": "",
 "Partida": "",
-"Ronda": ""
+"Pixel": "",
+"Ronda": "",
+"Unidad": "",
+"ext_lista": ""
 }
 
 [application]
@@ -47,6 +89,9 @@ config/icon="res://icon.png"
 Gamestate="*res://gamestate/gamestate.gd"
 Orquestador="*res://orquestador.gd"
 Db="*res://acceso_a_datos/db.gd"
+Diccionario="*res://extensiones/diccionario.gd"
+Listas="*res://extensiones/listas.gd"
+Convertir="*res://value_types/convertir.gd"
 
 [rendering]
 

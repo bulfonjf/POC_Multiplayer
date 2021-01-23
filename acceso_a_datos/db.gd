@@ -44,3 +44,20 @@ func actualizar(comando):
 
 	# close the connection
 	db.close()
+
+func retornar_primer_elemento(_resultado_consulta):
+	if _resultado_consulta:
+		return _resultado_consulta[0]
+	else:
+		return {}
+	
+# -----------------------------
+# ------- QUERIES -------------
+# -----------------------------
+
+func consultar_item_por_nombre(_nombre_item) -> Dictionary:
+	var result = self.consultar("select * from items where nombre == '%s'" % _nombre_item)
+	return retornar_primer_elemento(result)
+	
+	
+

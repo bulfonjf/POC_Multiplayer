@@ -6,11 +6,11 @@ var id
 
 var nombre_tabla = "partidas"
 
-func _init(_nombre):
-	self.nombre = _nombre
+func _init(_partida):
+	self.nombre = _partida.nombre
 
 func guardar_en_db(_db):
 	self.id = _db.generar_id(nombre_tabla)
 
-	var comando = "insert into %s (id, nombre) values (%d, \"%s\")"  % [self.nombre_tabla, self.id, self.nombre]
+	var comando = "insert into %s (id, nombre) values (%d, '%s')"  % [self.nombre_tabla, self.id, self.nombre]
 	_db.actualizar_con_transaccion(comando)

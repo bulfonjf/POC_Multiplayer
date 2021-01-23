@@ -75,3 +75,5 @@ func iniciar_partida(_partida):
 	for peer_id in players:
 		rpc_id(peer_id,"iniciar_partida", _partida)
 	Orquestador.iniciar_partida(_partida)
+	var grilla = load("res://grilla/grilla.tscn").instance()
+	get_node("/root").add_child(grilla)
