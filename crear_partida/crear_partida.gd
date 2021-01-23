@@ -5,22 +5,7 @@ onready var lista_clientes : VBoxContainer = $VBoxContainer
 signal partida_lista(partida)
 
 var _ignore
-#var partida = {
-#		"nombre": "partida_1_prueba",
-#		"ronda": { 
-#			"numero_ronda" : 1
-#		},
-#		"facciones": [{
-#			"nombre": "orcos",
-#			"unidades": [{
-#				"fighter": {
-#					"nombre": "fighter",
-#					"equipo": []
-#				}
-#			}],
-#			"edificios": []
-#		}]
-#	}
+
 var partida = {
 		"nombre": "partida_1_prueba",
 		"ronda": { 

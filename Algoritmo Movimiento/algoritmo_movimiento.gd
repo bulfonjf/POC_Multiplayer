@@ -3,11 +3,11 @@ extends Reference
 onready var grilla_principal : TileMap = get_node("res://Grilla")
 
 # esto devolveria la base si consultas las celdas ocupadas
-var ejemplo = [
-	{"posicion_x": 1, "posicion_y": 0, "entidad_id": 10, "entidad_tipo": "unidad"},
-	{"posicion_x": 15, "posicion_y": 3, "entidad_id": 15, "entidad_tipo": "unidad"},
-	{"posicion_x": 2, "posicion_y": 2, "entidad_id": 7, "entidad_tipo": "edificio"}
-]	
+#var ejemplo = [
+#	{"posicion_x": 1, "posicion_y": 0, "entidad_id": 10, "entidad_tipo": "unidad"},
+#	{"posicion_x": 15, "posicion_y": 3, "entidad_id": 15, "entidad_tipo": "unidad"},
+#	{"posicion_x": 2, "posicion_y": 2, "entidad_id": 7, "entidad_tipo": "edificio"}
+#]	
 
 func evaluar_celdas_adyacentes(_celda_actor : Celda):
 	var celdas_a_evaluar : Array = []
@@ -25,7 +25,7 @@ func obtener_info_celda(_celda : Celda):
 	celda = _celda.vector
 	valor_x = celda.x
 	valor_y = celda.y
-	var info_celda = Db.consultar("select entidad_id, entidad_tipo from celdas_ocupadas where posicion_x = %d and posicion_y = %d" % [%valor_x, %valor_y])
+	var info_celda = Db.consultar("select entidad_id, entidad_tipo from celdas_ocupadas where posicion_x = %d and posicion_y = %d" % [valor_x, valor_y])
 	return info_celda
 
 
@@ -46,7 +46,7 @@ func obtener_celdas_donde_se_puede_mover(actor):
 		
 	
 	for celda in celdas_adyacentes_al_actor: #LLama a evaluzar_brach  por cada celda adyacente
-		evaluar_branch(celda_actor, celda, actor.get_unidad().get_movimientos(), actor, celdas_de_movimiento_permitido) 
+		evaluar_branch(celda_actor, celda, actor.get_movimientos(), actor, celdas_de_movimiento_permitido) 
 	
 	for celda in celdas_de_movimiento_permitido:
 		if celda_actor.vector == celda:
@@ -62,7 +62,7 @@ func obtener_celdas_donde_se_puede_mover(actor):
 #comienza con las cellas adyacentes al actor, y se va llamando recursivamente
 func evaluar_branch(celda_origen: Celda, celda_destino: Celda, movimiento_disponible, actor, celdas_de_movimiento_permitido):
 	var tipo_de_terreno_celda_destino = grilla_principal.obtener_info_de_celda(celda_destino)["tipo"] #obtiene el "tipo" de tile
-	var coste_de_movimiento = actor.get_unidad().get_coste_de_movimiento(tipo_de_terreno_celda_destino) #coste de mov del tile segun el "tipo" de actor
+	var coste_de_movimiento = actor.obtener_coste_movimiento(tipo_de_terreno_celda_destino) #coste de mov del tile segun el "tipo" de actor
 	var movimiento_disponible_branch = movimiento_disponible #variable de movimiento disponibles interna
 
 		

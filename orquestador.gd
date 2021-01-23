@@ -7,7 +7,7 @@ var ronda_script = load("res://ronda/ronda.gd")
 var equipo_script = preload("res://equipo/equipo.gd")
 var jugador_script = preload("res://jugador/jugador.gd")
 var faccion_script = preload("res://faccion/faccion.gd")
-var unidad_script = preload("res://unidad/unidad.gd")
+var unidad_script = load("res://unidad/unidad.gd")
 
 var transaccion_script = preload("res://acceso_a_datos/transaccion_db.gd")
 var migraciones_script = preload("res://acceso_a_datos/migraciones.gd")
@@ -16,7 +16,7 @@ var _ignore
 
 func _ready():
 	var migraciones = migraciones_script.new()
-	migraciiones.aplicar_migraciones()
+	migraciones.aplicar_migraciones()
 
 func iniciar_partida(_partida):
 	menu_crear_partida_tscn.hide()
@@ -33,7 +33,7 @@ func iniciar_partida(_partida):
 	
 	iniciar_ronda(_partida.ronda, partida.id, transaccion_db)
 	iniciar_equipos(_partida.equipos, partida.id, transaccion_db) 
-#	iniciar_grilla(tiles, celdas_ocupadas, transaccion_db)
+
 
 	transaccion_db.cerrar_transaccion()
 
@@ -68,7 +68,7 @@ func iniciar_faccion(_faccion, _id_jugador, _db):
 
 func iniciar_unidad(_unidad, _id_faccion, _db):
 	var unidad = unidad_script.new(_unidad, _id_faccion)
-	unidad.guardad_en_db(_db)
+	unidad.guardar_en_db(_db)
 
 	for item_nombre in equipamiento:
 		iniciar_equipamiento(item_nombre, unidad.id, _db)
