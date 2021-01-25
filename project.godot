@@ -81,13 +81,12 @@ _global_script_class_icons={
 [application]
 
 config/name="POC_Multijugador"
-run/main_scene="res://crear_partida/crear_partida.tscn"
+run/main_scene="res://EscenaPrincipal.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Gamestate="*res://gamestate/gamestate.gd"
-Orquestador="*res://orquestador.gd"
 Db="*res://acceso_a_datos/db.gd"
 Diccionario="*res://extensiones/diccionario.gd"
 Listas="*res://extensiones/listas.gd"

@@ -1,16 +1,16 @@
 extends Node2D
 
-onready var menu_crear_partida_tscn = get_node("/root/escena_principal/menu_crear_partida")
+onready var menu_crear_partida_tscn = $lobby
 # to-do ver si usamos load o preload
-var partida_script = preload("res://partida/partida.gd")
+var partida_script = load("res://partida/partida.gd")
 var ronda_script = load("res://ronda/ronda.gd")
-var equipo_script = preload("res://equipo/equipo.gd")
-var jugador_script = preload("res://jugador/jugador.gd")
-var faccion_script = preload("res://faccion/faccion.gd")
+var equipo_script = load("res://equipo/equipo.gd")
+var jugador_script = load("res://jugador/jugador.gd")
+var faccion_script = load("res://faccion/faccion.gd")
 var unidad_script = load("res://unidad/unidad.gd")
 
-var transaccion_script = preload("res://acceso_a_datos/transaccion_db.gd")
-var migraciones_script = preload("res://acceso_a_datos/migraciones.gd")
+var transaccion_script = load("res://acceso_a_datos/transaccion_db.gd")
+var migraciones_script = load("res://acceso_a_datos/migraciones.gd")
 
 var _ignore
 
@@ -70,8 +70,8 @@ func iniciar_unidad(_unidad, _id_faccion, _db):
 	var unidad = unidad_script.new(_unidad, _id_faccion)
 	unidad.guardar_en_db(_db)
 
-	for item_nombre in equipamiento:
-		iniciar_equipamiento(item_nombre, unidad.id, _db)
+	#for item_nombre in equipamiento:
+	#	iniciar_equipamiento(item_nombre, unidad.id, _db)
 
 func iniciar_equipamiento(_item_nombre, _unidad_id, _db):
 	# to-do el item podria no existir y aca va a tirar un error	

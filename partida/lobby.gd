@@ -1,10 +1,14 @@
 extends Control 
+onready var VBox_lista_clientes = $VBoxContainer2/HBoxContainer/VBoxContainer
+onready var gamestate_nodo = get_tree().get_root().get_node("Gamestate")
 
-onready var lista_clientes : VBoxContainer = $VBoxContainer
 
 signal partida_lista(partida)
-
+signal obtener_equipos(equipos)
+signal obtener_facciones(facciones)
 var _ignore
+var equipos : Array = ["azul", "rojo"]
+var facciones : Array = ["elfos", "orcos", "humanos"]
 
 var partida = {
 		"nombre": "partida_1_prueba",
@@ -68,18 +72,29 @@ func _ready():
 	_ignore = Gamestate.connect("cliente_conectado", self, "_on_cliente_conectado")
 	_ignore = Gamestate.connect("cliente_desconectado", self, "_on_cliente_desconectado")
 	_ignore = self.connect("partida_lista", Gamestate, "iniciar_partida")
+	_ignore = self.connect("obtener_equipos", Gamestate, "obtener_equipos")
+	_ignore = self.connect("obtener_facciones", Gamestate, "obtener_facciones")
+	self.obtener_equipos()
+	self.obtener_facciones()
 
-func _on_cliente_conectado(cliente_id):
+func _on_cliente_conectado(cliente_id, nombre_cliente):
 	var label = Label.new();
-	label.text = "se ha conectado el cliente con id:" + str(cliente_id);
+	label.name = str(cliente_id)
+	label.text = "se ha conectado el cliente " + str(nombre_cliente) + " con id:" + str(cliente_id);
 
-	lista_clientes.add_child(label);
+	VBox_lista_clientes.add_child(label);
 
 func _on_cliente_desconectado(cliente_id):
-	var label = Label.new();
-	label.text = "se ha desconectado el cliente con id:" + str(cliente_id);
-
-	lista_clientes.add_child(label);
+	var nombre_label = str(cliente_id)
+	var label = get_tree().get_root().find_node(str(nombre_label) , true, false)
+	label.queue_free()
+	pass
 
 func _on_readybtn_pressed():
 	emit_signal("partida_lista", partida) 
+
+func obtener_equipos():
+	emit_signal("obtener_equipos", equipos)
+
+func obtener_facciones():
+	emit_signal("obtener_facciones", facciones)
