@@ -6,6 +6,8 @@ var transaccion_script = preload("res://acceso_a_datos/transaccion_db.gd")
 
 func aplicar_migraciones():
 	var migraciones = [
+		crear_escenarios(),
+		
 		crear_partidas(),
 		crear_rondas(),
 		crear_turnos(),
@@ -34,11 +36,20 @@ func aplicar_migraciones():
 
 	transaccion_db.cerrar_transaccion()
 
+func crear_escenarios():
+	return """  
+		create table if not exists escenarios (
+		id integer PRIMARY KEY,
+		nombre nvarchar(500)
+		);"""
+
 func crear_partidas():
 	return """  
 		create table if not exists partidas (
 		id integer PRIMARY KEY,
-		nombre nvarchar(100)
+		id_escenario integer
+
+		FOREIGN KEY id_escenario REFERENCES escenarios(id)
 		);"""
 
 func crear_rondas():

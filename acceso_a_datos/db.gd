@@ -59,5 +59,6 @@ func consultar_item_por_nombre(_nombre_item) -> Dictionary:
 	var result = self.consultar("select * from items where nombre == '%s'" % _nombre_item)
 	return retornar_primer_elemento(result)
 	
-	
+func consultar_escenario_por_defecto():
+	pass	
 

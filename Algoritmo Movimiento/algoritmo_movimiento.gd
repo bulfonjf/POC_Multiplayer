@@ -1,6 +1,6 @@
 extends Reference
 
-onready var grilla_principal : TileMap = get_node("res://Grilla")
+onready var grilla_principal : TileMap = get_tree().get_root().get_node("res://Grilla")
 
 # esto devolveria la base si consultas las celdas ocupadas
 #var ejemplo = [

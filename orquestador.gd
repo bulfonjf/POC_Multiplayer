@@ -8,28 +8,40 @@ var equipo_script = load("res://equipo/equipo.gd")
 var jugador_script = load("res://jugador/jugador.gd")
 var faccion_script = load("res://faccion/faccion.gd")
 var unidad_script = load("res://unidad/unidad.gd")
-
 var transaccion_script = load("res://acceso_a_datos/transaccion_db.gd")
 var migraciones_script = load("res://acceso_a_datos/migraciones.gd")
 
 var _ignore
+var partida_en_curso_id
 
 func _ready():
 	var migraciones = migraciones_script.new()
 	migraciones.aplicar_migraciones()
 
-func iniciar_partida(_partida):
-	menu_crear_partida_tscn.hide()
+	# Al iniciar el servidor se crea una partida con el escenario por defecto
+	# esto es similar a cuando en el age creas una partida, pero ya tenes por defecto cosas seleccionadas
+	# los clientes van a poder cambiar todo lo que quieran antes de dar inicio a la partida
+	# es necesario hacer esto para tener el Id de la partida y asi poder registrar a los jugadores (ya que necesitan el id_partida para eso)
+	var escenario_por_defecto = Db.consultar_escenario_por_defecto()
+	var fecha_actual = OS.get_time()
+	var partida = partida_script.new("%s %s" % [escenario_por_defecto.nombre, fecha_actual])
 	
-	var partida = partida_script.new(_partida)
+	var transaccion_db = transaccion_script.new()
+	transaccion_db.abrir_transaccion()
+	partida.guardar_en_db(transaccion_db)
+	partida_en_curso_id = partida.id
+	transaccion_db.cerrar_transaccion()
 
+
+func iniciar_partida(_partida):
+	
 	var transaccion_db = transaccion_script.new()
 
 	# todas las entidades que se creen al iniciar la partida deben ir
 	# dentro de la transaccion
 	transaccion_db.abrir_transaccion()
 
-	partida.guardar_en_db(transaccion_db)
+
 	
 	iniciar_ronda(_partida.ronda, partida.id, transaccion_db)
 	iniciar_equipos(_partida.equipos, partida.id, transaccion_db) 

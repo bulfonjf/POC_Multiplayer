@@ -1,6 +1,6 @@
 extends Control 
 onready var VBox_lista_clientes = $VBoxContainer2/HBoxContainer/VBoxContainer
-onready var gamestate_nodo = get_tree().get_root().get_node("Gamestate")
+
 
 
 signal partida_lista(partida)
